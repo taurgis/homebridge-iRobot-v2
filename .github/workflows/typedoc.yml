@@ -1,12 +1,15 @@
 # This is a basic workflow to help you get started with Actions
 name: Typedoc Generator
+permissions:
+  contents: write
+  pull-requests: write
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ develop ]
-    paths: [ src/** ] 
+    paths: [ src/** ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -30,18 +33,18 @@ jobs:
 
       - name: Remove Old Documentation
         run: rm -r docs
-        
+
       - name: Re-Create Docs Folder
         run: mkdir docs
-        
+
       - name: Install Dependencies
         run: npm install && npm install typedoc --save-dev
       - name: Generate Javadoc
         run: npx typedoc --out docs src/*
-      
+
       - name: Re-inject Theme
         run: 'echo "theme: jekyll-theme-tactile" > docs/_config.yml'
-          
+
       - name: Commit files
         id: commit
         shell: bash

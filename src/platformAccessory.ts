@@ -307,7 +307,7 @@ export class iRobotPlatformAccessory {
                         if ((region_.region_id === region.region_id) && (region_.type === region.type)) {
                             const regionIndex = currentMap.regions.indexOf(region_);
 
-                            this.platform.log.info('Updating existing region for roomba.', this.device.name, '(', region.region_id, ')');
+                            this.platform.log.info('Updating existing region for roomba.', this.device.name, '(', region.region_id, ', ', region.type, ')');
 
                             // If the current region has parameters, but the new one doesn't, keep the old parameters
                             if (region_.parameters && !region.parameters) {
