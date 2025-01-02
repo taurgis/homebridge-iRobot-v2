@@ -1,3 +1,7 @@
+### 3.2.5-alpha.0 
+- Add zone type checks
+
+
 ### 3.2.4 
 - Conduct account checks only when needed.
 - Introduced sanity checks to avoid complete app failure when configuration files are incomplete.
