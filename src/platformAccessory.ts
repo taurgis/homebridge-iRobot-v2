@@ -275,12 +275,13 @@ export class iRobotPlatformAccessory {
         pmap_id: never, regions: [{
             parameters: object,
             region_id?: string,
+            type?: string,
         }],
         user_pmapv_id: never,
     }) {
         if (this.accessory.context.maps !== undefined) {
             let currentMap: {
-                regions: [{ region_id?: string, parameters: object}],
+                regions: [{ region_id?: string, parameters: object, type?: string }],
                 user_pmapv_id: string,
             } | null = null;
 
@@ -303,7 +304,7 @@ export class iRobotPlatformAccessory {
                     let exists = false;
 
                     for (const region_ of currentMap.regions) {
-                        if (region_.region_id === region.region_id) {
+                        if ((region_.region_id === region.region_id) && (region_.type === region.type)) {
                             const regionIndex = currentMap.regions.indexOf(region_);
 
                             this.platform.log.info('Updating existing region for roomba.', this.device.name, '(', region.region_id, ')');
@@ -368,10 +369,10 @@ export class iRobotPlatformAccessory {
             const index = this.accessory.context.maps.indexOf(map);
 
             for (const region of map.regions) {
-                ((this.accessory.getService('Map ' + index + ' Room ' + region.region_id) ||
+                ((this.accessory.getService('Map ' + index + ' Room ' + region.region_id + ' ' + region.type) ||
           this.accessory.addService(this.platform.Service.Switch,
-              'Map ' + index + ' Room ' + region.region_id,
-              index + ':' + region.region_id))
+              'Map ' + index + ' Room ' + region.region_id + ' ' + region.type,
+              index + ':' + region.region_id + ':' + region.type))
                     .getCharacteristic(this.platform.Characteristic.On))
                     .removeAllListeners()
                     .onSet((activate) => {
@@ -393,7 +394,7 @@ export class iRobotPlatformAccessory {
 
                         this.platform.log.info(activate ? 'enabling' : 'disabling',
                             'room ' +
-                            region.region_id +
+                            region.region_id + ' (' + region.type + ')' +
                             ' of map ' +
                             index +
                             ' on roomba ' +
