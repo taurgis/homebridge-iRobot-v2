@@ -39,6 +39,7 @@ Once the latest iOS 18 update is released, I will update the plugin to support t
 
 | Model     | Supported | Reported By                                       |
 |-----------|-----------|---------------------------------------------------|
+| e5        | No        | [mylover21](https://github.com/mylover21)         |
 | i5        | Yes       | [jandrade45](https://github.com/jandrade45)       |
 | i7        | Yes       | [Clouder59](https://github.com/Clouder59)         |
 | 606       | No        | [PvdGulik](https://github.com/PvdGulik)           |
