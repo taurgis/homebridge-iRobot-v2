@@ -1,3 +1,7 @@
+### 3.2.5-alpha.1 
+Fix script execution on Windows.
+
+
 ### 3.2.5-alpha.0 
 - Add zone type checks
 
