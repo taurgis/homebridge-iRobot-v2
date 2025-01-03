@@ -1,4 +1,4 @@
-import child_process from 'child_process';
+import { spawnSync } from 'child_process';
 import { Logger, PlatformConfig } from 'homebridge';
 
 export function getRoombas(email: string, password: string, log: Logger, config: PlatformConfig): Robot[] {
@@ -10,7 +10,8 @@ export function getRoombas(email: string, password: string, log: Logger, config:
     } else {
         log.info('Logging into iRobot...');
 
-        const Robots = child_process.execFileSync(__dirname + '/scripts/getRoombaCredentials.js', [email, password]).toString();
+        const result = spawnSync('node', [__dirname + '/scripts/getRoombaCredentials.js', email, password]);
+        const Robots = result.stdout.toString();
 
         try {
             robots = JSON.parse(Robots);
@@ -33,7 +34,8 @@ export function getRoombas(email: string, password: string, log: Logger, config:
 
             log.info('Configuring roomba:', robot.name);
 
-            const robotIP = child_process.execFileSync(__dirname + '/scripts/getRoombaIP.js', [robot.blid]).toString();
+            const result = spawnSync('node', [__dirname + '/scripts/getRoombaIP.js', robot.blid]);
+            const robotIP = result.stdout.toString();
 
             try {
                 const robotInfo = JSON.parse(robotIP);
@@ -63,8 +65,8 @@ export function getRoombas(email: string, password: string, log: Logger, config:
     }
 
     return goodRoombas;
-
 }
+
 function getModel(sku: string):string {
     switch (sku.charAt(0)) {
         case 'j':
