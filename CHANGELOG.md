@@ -1,3 +1,7 @@
+### 3.2.5-alpha.2 
+* Updated Roomba library
+
+
 ### 3.2.5-alpha.1 
 Fix script execution on Windows.
 
