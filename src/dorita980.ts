@@ -1,4 +1,4 @@
-declare module '@taurgis/roomba-unofficial-sdk' {
+declare module '@karlvr/dorita980' {
   export class Local {
       /**
      * The library send commands directly over wifi to your robot. You dont need an internet connection.

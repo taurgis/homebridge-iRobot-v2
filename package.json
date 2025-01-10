@@ -33,7 +33,7 @@
   "dependencies": {
     "@actions/core": "1.10.1",
     "@homebridge/plugin-ui-utils": "1.0.3",
-    "@taurgis/roomba-unofficial-sdk": "1.0.4"
+    "@karlvr/dorita980": "3.2.1"
   },
   "devDependencies": {
     "@types/node": "20.14.10",

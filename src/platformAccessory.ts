@@ -4,8 +4,7 @@ import events from 'events';
 const eventEmitter = new events.EventEmitter();
 
 import { Robot } from './getRoombas';
-import dorita980 from '@taurgis/roomba-unofficial-sdk';
-
+import dorita980 from '@karlvr/dorita980';
 
 /**
  * Platform Accessory
