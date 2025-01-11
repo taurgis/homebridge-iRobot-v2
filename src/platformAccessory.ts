@@ -240,7 +240,6 @@ export class iRobotPlatformAccessory {
                     this.configureRoomba();
                 }
             });
-
         } catch (err) {
             this.platform.log.error('Fatal error connecting to Roomba:', this.device.name);
         }
