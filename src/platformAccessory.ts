@@ -6,6 +6,28 @@ const eventEmitter = new events.EventEmitter();
 import { Robot } from './getRoombas';
 import dorita980 from '@karlvr/dorita980';
 
+const ROBOT_CIPHERS = ['AES128-SHA256', 'TLS_AES_256_GCM_SHA384'];
+
+
+/**
+ * Check if we should try a different cipher
+ *
+ * @param error - The error to check
+ *
+ * @returns - If we should try a different cipher
+ */
+function shouldTryDifferentCipher(error: Error) {
+    if (error.message.indexOf('TLS') !== -1) {
+        return true;
+    }
+
+    if (error.message.toLowerCase().indexOf('identifier rejected') !== -1) {
+        return true;
+    }
+
+    return false;
+}
+
 /**
  * Platform Accessory
  *
@@ -20,6 +42,7 @@ export class iRobotPlatformAccessory {
     private binMotion!: Service;
     private shutdown = false;
     private starting = false;
+    private cipherIndex = 0;
 
     private binConfig: string[] = this.device.multiRoom && this.platform.config.ignoreMultiRoomBin ?
         [] : this.platform.config.bin.split(':');
@@ -141,8 +164,15 @@ export class iRobotPlatformAccessory {
         }
 
         try {
-            this.roomba = new dorita980.Local(this.device.blid, this.device.password, this.device.ip,
-                this.device.info.ver !== undefined ? parseInt(this.device.info.ver) as 2 | 3 : 2);
+            this.roomba = new dorita980.Local(
+                this.device.blid,
+                this.device.password,
+                this.device.ip,
+                this.device.info.ver !== undefined ? parseInt(this.device.info.ver) as 2 | 3 : 2,
+                {
+                    ciphers: ROBOT_CIPHERS[this.cipherIndex],
+                },
+            );
 
             this.roomba.on('connect', () => {
                 this.accessory.context.connected = true;
@@ -194,7 +224,23 @@ export class iRobotPlatformAccessory {
                 } else {
                     this.platform.log.warn('Roomba', this.device.name, ' connection closed.');
                 }
-            }).on('state', this.updateRoombaState.bind(this));
+            }).on(
+                'state',
+                this.updateRoombaState.bind(this),
+            ).on('error', (error) => {
+                this.platform.log.error('Roomba', this.device.name, ' error:', error);
+
+                if (shouldTryDifferentCipher(error)) {
+                    this.cipherIndex = this.cipherIndex === 0 ? 1 : 0;
+
+                    this.platform.log.warn('Trying different cipher:', ROBOT_CIPHERS[this.cipherIndex]);
+
+                    this.roomba.end();
+
+                    this.configureRoomba();
+                }
+            });
+
         } catch (err) {
             this.platform.log.error('Fatal error connecting to Roomba:', this.device.name);
         }

@@ -6,9 +6,9 @@ declare module '@karlvr/dorita980' {
      * @param password your roomba's password
      * @param ip your roomba's ip address
      * @param version (optional) your roomba's protocol version (1-3, defaults to 2)
-     * @param interval (optional) interval in miliseconds to emith mission event (defaults to 800ms)
+     * @param options (optional) options or interval in miliseconds to emith mission event (defaults to 800ms)
      */
-      constructor(username: string, password: string, ip: string, version?: 2 | 3, interval?: number);
+      constructor(username: string, password: string, ip: string, version?: 2 | 3, options?: object|number);
       /** Emitted on successful Connection. */
       on(event: 'connect', listener: () => void): this;
       /** Emitted after a reconnection. */
@@ -21,6 +21,8 @@ declare module '@karlvr/dorita980' {
       on(event: 'update', listener: (data: Data) => void): this;
       /** Emitted every emitIntervalTime milliseconds with the mission data. (util for mapping in models with position reporting) */
       on(event: 'mission', listener: (data: cleanMissionStatus) => void): this;
+      /** Emitted on error. */
+      on(event: 'error', listener: (error: Error) => void): this;
 
       /**
      * Emitted every time the Robot publish a new message to the mqtt bus.
