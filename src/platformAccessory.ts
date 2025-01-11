@@ -230,8 +230,8 @@ export class iRobotPlatformAccessory {
             ).on('error', (error) => {
                 this.platform.log.error('Roomba', this.device.name, ' error:', error);
 
-                if (shouldTryDifferentCipher(error)) {
-                    this.cipherIndex = this.cipherIndex === 0 ? 1 : 0;
+                if (shouldTryDifferentCipher(error) && this.cipherIndex < ROBOT_CIPHERS.length - 1) {
+                    this.cipherIndex = this.cipherIndex + 1;
 
                     this.platform.log.warn('Trying different cipher:', ROBOT_CIPHERS[this.cipherIndex]);
 
