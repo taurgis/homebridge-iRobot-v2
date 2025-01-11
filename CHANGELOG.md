@@ -1,3 +1,7 @@
+### 3.2.5-alpha.3 
+* Implemented cypher rotation to enable connections to Roombas using non-default cyphers
+
+
 ### 3.2.5-alpha.2 
 * Updated Roomba library
 
