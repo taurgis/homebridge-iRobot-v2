@@ -1,3 +1,7 @@
+### 3.2.5-alpha.5 
+- Add zone type to the activerooms checks 
+
+
 ### 3.2.5-alpha.3 
 * Implemented cypher rotation to enable connections to Roombas using non-default cyphers
 
