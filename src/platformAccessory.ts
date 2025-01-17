@@ -423,13 +423,13 @@ export class iRobotPlatformAccessory {
                         if (activate) {
                             this.accessory.context.activeMap = index;
 
-                            if (!this.accessory.context.activeRooms.includes(region.region_id)) {
-                                this.accessory.context.activeRooms.push(region.region_id);
+                            if (!this.accessory.context.activeRooms.includes(region.region_id + ':' + region.type)) {
+                                this.accessory.context.activeRooms.push(region.region_id + ':' + region.type);
                             }
 
                             this.service.setCharacteristic(this.platform.Characteristic.TargetFanState, 0);
                         } else {
-                            this.accessory.context.activeRooms.splice(this.accessory.context.activeRooms.indexOf(region.region_id));
+                            this.accessory.context.activeRooms.splice(this.accessory.context.activeRooms.indexOf(region.region_id + ':' + region.type));
 
                             if (this.accessory.context.activeRooms.length === 0) {
                                 this.service.setCharacteristic(this.platform.Characteristic.TargetFanState, 1);
@@ -447,7 +447,7 @@ export class iRobotPlatformAccessory {
                     })
                     .onGet(() => {
                         return this.accessory.context.activeMap === index ?
-                            this.accessory.context.activeRooms.includes(region.region_id) : false;
+                            this.accessory.context.activeRooms.includes(region.region_id + ':' + region.type) : false;
                     });
             }
         }
@@ -624,7 +624,10 @@ export class iRobotPlatformAccessory {
 
                                 for (const room of this.accessory.context.activeRooms) {
                                     for (const region of this.accessory.context.maps[this.accessory.context.activeMap].regions) {
-                                        if (region.region_id === room) {
+                                        const region_id = room.split(':')[0];
+                                        const type = room.split(':')[1];
+
+                                        if (region.region_id === region_id && region.type === type) {
                                             args.regions.push(region);
                                         }
                                     }
