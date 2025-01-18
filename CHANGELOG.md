@@ -1,3 +1,7 @@
+### 3.2.5-alpha.6 
+- Added extra logging on extra step after stop + Adjusted how it is executed
+
+
 ### 3.2.5-alpha.5 
 - Add zone type to the activerooms checks 
 
