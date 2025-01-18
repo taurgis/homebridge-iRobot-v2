@@ -648,16 +648,10 @@ export class iRobotPlatformAccessory {
                     this.platform.log.info('Stopping Clean Cycle');
 
                     setTimeout(async () => {
-                        eventEmitter.emit('state');
+                        this.platform.log.info('Executing second action:', configOffAction[1]);
+
+                        await this.roomba[configOffAction[1]]();
                     }, 5000);
-
-                    eventEmitter.on('state', async () => {
-                        if (configOffAction[1] !== 'none') {
-                            await this.roomba[configOffAction[1]]();
-                        }
-
-                        eventEmitter.removeAllListeners();
-                    });
 
                     this.starting = false;
                 }
