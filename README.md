@@ -47,9 +47,10 @@ Once the latest iOS 18 update is released, I will update the plugin to support t
 | 698       | No        | [jojoballa](https://github.com/jojoballa)         |
 | Braava m6 | Yes       | [taurgis](https://github.com/taurgis)             |
 | m6        | Yes       | [ginoledesma](https://github.com/ginoledesma)     |
-| j5        | Yes       | [bmurphy04](https://github.com/bmurphy04)     |
+| j5        | Yes       | [bmurphy04](https://github.com/bmurphy04)         |
 | j7        | Yes       | [ginoledesma](https://github.com/ginoledesma)     |
-| j7 Combo  | Yes       | [tomadimitrie](https://github.com/tomadimitrie)
+| j7 Combo  | Yes       | [tomadimitrie](https://github.com/tomadimitrie)   |
+| j8        | Yes       | [gabevf](https://github.com/gabevf)     |
 | i3        | yes       | [taurgis](https://github.com/taurgis)             |
 | 980       | No        | [jeanchrijaz](https://github.com/jeanchrijaz)     |
 | i9        | Yes       | [douginoz](https://github.com/douginoz)           |
@@ -59,6 +60,7 @@ Once the latest iOS 18 update is released, I will update the plugin to support t
 | 965       | Yes       | [bloomkd46](https://github.com/bloomkd46)         |
 | 981       | Yes       | [AustinHenley](https://github.com/AustinHenley)   |
 | 985       | No        | [ridlerontheroof](https://github.com/ridlerontheroof)   |
+| 989       | Yes       | [Silvian88](https://github.com/Silvian88)   |
 | i8        | Yes       | [bloomkd46](https://github.com/bloomkd46)         |
 | y0        | No        | [Oloman2A](https://github.com/Oloman2A)           |
 | e6        | No        | [kd2acl](https://github.com/kd2acl)               |
